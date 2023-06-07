@@ -15,9 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Path
-        run: cd src/GreenPath
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -26,9 +23,11 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
+        working-directory: ./src/GreenPath
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        working-directory: ./src/GreenPath
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
