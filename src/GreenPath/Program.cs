@@ -1,4 +1,5 @@
 using GreenPath.Data;
+using GreenPath.Helpers;
 using GreenPath.Interfaces;
 using GreenPath.Models;
 using GreenPath.Repository;
@@ -14,6 +15,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
+
+// Cloudinary e photoservice
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 //Add SQL Db connection, DefaultConnection esta em appsettings.json
 builder.Services.AddDbContext<BancoContexto>(options =>
